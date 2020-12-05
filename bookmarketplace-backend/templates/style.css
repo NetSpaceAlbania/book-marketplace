@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    font-family: sans-serif;
+}
+
+.form-inline{
+    position: absolute;
+    left:25%;
+   
+}
+.form-inline input{
+    width: 600px;
+
+}
+#btn{
+    position: absolute;
+    left: 80%;
+}
+.div-kryesor{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+.card1{
+    margin: 0;
+    padding: 0%;
+    width: 50px;
+}
+#qyteti-h3{
+    margin: 20px;
+    padding: 10px;
+    text-align: left;
+}
+#select-qytetet{
+    margin: 10px ;
+    padding: 10px;
+    
+    width: 50%;
+    text-align: center;
+}
+#select-qytetet option{
+    width: 100px;
+}
+.btn-group{
+    width: 60%;
+    position: absolute;
+    left: 10%;
+}
+.price{
+    display: flex;
+}
+#kerko-btn{
+    margin-top: 40px;
+    padding: 10px;
+}
+.permbajtja{
+    position: absolute;
+    top: 115px;
+    left: 25%;
+
+    
+}
+.permbajtja .card{
+    display: inline;
+    float: left;
+    margin: 10px;
+
+}
+.dropdown1 .dropdown-menu{
+    position: absolute;
+    right: 0;
+}
