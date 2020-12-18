@@ -4,5 +4,5 @@ Per te pare projektin klononi repon, nga terminali, navigoni ne folderin .../boo
 ### `npm i`
 per te installuar te gjith dependencies e nevojshme dhe me pas perdorni
 ### `npm start`
-projekti do te hapet nje tab te ri ne browserin tuaj te parazgjedhur me urln http://localhost:300.
+projekti do te hapet nje tab te ri ne default browser me urln http://localhost:3000.
 
