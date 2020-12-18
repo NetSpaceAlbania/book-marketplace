@@ -9,7 +9,7 @@ import { Button,
     InputGroup,
     InputLeftElement,
     Box
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 
 
@@ -21,15 +21,8 @@ const Filter = () => {
     const universitetet = ["Universiteti i Tiranes", "Universiteti Politeknik i Tiranes"];
 
     return (
-        <div>
-            <Flex
-                flexDirection="column"
-                alignItems="center"
-                pos="sticky"
-                top="0"
-                left="0"
-                h="calc(100vh - 80px - 88px);"
-                >
+        <Box borderRight="1px solid #E0E0E0" overflow="hidden" pos="sticky" top="20" left="0">
+            <Flex flexDirection="column" alignItems="center" h="calc(100vh - 80px - 88px);">
                     <FormControl w="250px" pt={6}>
                         <FormLabel fontSize="xl" >Qyteti</FormLabel>
                         <Select placeholder="Gjithë Shqipëria" mt="8px">
@@ -52,7 +45,7 @@ const Filter = () => {
                             <Select placeholder="Gjithë Vitet" mt="8px">
                                 <option value={1} key={1}>1</option>
                                 <option value={2} key={2}>2</option>
-                                <option value={2} key={2}>2</option>
+                                <option value={3} key={3}>3</option>
                             </Select>
                         </FormControl>
                     </Box>
@@ -74,7 +67,7 @@ const Filter = () => {
                                 children="ALL"
                                 color="gray.300"
                                 />
-                                <Input type="phone" placeholder="MIN" />
+                                <Input type="phone" placeholder="MAX" />
                             </InputGroup>
                         </Flex>
                     </FormControl>
@@ -82,7 +75,7 @@ const Filter = () => {
             <Flex justifyContent="center">
                 <Button colorScheme="blue" w="250px" mt={6} mb={6}>Filtro</Button>
             </Flex>
-        </div>
+        </Box>
     )
 }
 
