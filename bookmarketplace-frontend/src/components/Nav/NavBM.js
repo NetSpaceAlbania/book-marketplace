@@ -6,7 +6,8 @@ import { Heading,
     Input,
     Flex
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons"
+import { SearchIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 const NavBM = () => {
     return (
@@ -22,9 +23,11 @@ const NavBM = () => {
                 </InputGroup>
                 <Button colorScheme="blue" variant="outline">Kerko</Button>
             </Flex>
-            <Button colorScheme="blue" variant="solid">
-            + Krijo nje njoftim
-            </Button>
+            <Link to="/signin">
+                <Button colorScheme="blue" variant="solid">
+                + Krijo nje njoftim
+                </Button>
+            </Link>
         </Flex>
     )
 }

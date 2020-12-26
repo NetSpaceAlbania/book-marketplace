@@ -26,7 +26,7 @@ const Listings = () => {
                 </Flex>
             </Flex>
             <Flex justifyContent="space-around" wrap="wrap" w="90%">
-                {librat.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" mt="10" key={e}>
+                {librat.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" my="5" key={e}>
                     <Image src={libri} alt={libri} borderTopRadius="lg" cursor="pointer"/>
                     <Box m="6" cursor="pointer">
                         <Box fontWeight="semibold" as="h4" isTruncated>
