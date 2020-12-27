@@ -5,13 +5,8 @@ import { signup } from '../actions/auth';
 import {
     Formik,
     Field,
-    Form,
-    useField,
-    FieldAttributes,
-    FieldArray
+    Form
   } from "formik";
-
-import * as yup from "yup";
 
 import { Grid,
     Image,
@@ -31,7 +26,8 @@ import { Grid,
     ModalBody,
     ModalFooter,
     useDisclosure,
-    Text
+    Text,
+    FormErrorMessage
 } from "@chakra-ui/react";
 import bookIllustation from "../assets/bookIllustation.svg";
 
@@ -39,27 +35,7 @@ const SignUp = ({ signup, isAuthenticated }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const [formData, setFormData] = useState({
-          username: '',
-          email: '',
-          password: '',
-          re_password: ''
-      });
-
     const [accountCreated, setAccountCreated] = useState(false);
-
-    const { username, email, password, re_password } = formData;
-
-    const onChange = e => setFormData({ ...formData, [e.target.id]: e.target.value });
-
-    const onSubmit = e => {
-        e.preventDefault();
-
-        if (password === re_password) {
-            signup({ username, email, password, re_password });
-            setAccountCreated(true);
-        }
-    };
 
     if (isAuthenticated)
         return <Redirect to='/' />;
@@ -85,30 +61,70 @@ const SignUp = ({ signup, isAuthenticated }) => {
                     >
                         <Box p={4}>
                         <Formik 
-                            initialValues={{ username, email, password, re_password }} 
-                            // onSubmit={e => onSubmit(e)}
-                            onSubmit={e => console.log(e)}
+                            initialValues={{ username: '', email: '', password: '', re_password: '' }}
+                            onSubmit={e => {console.log(e); 
+                                const { username, email, password, re_password } = e;
+                                signup({ username, email, password, re_password });
+                                setAccountCreated(true);
+                            }}
+                            validate={values => {
+                                const errors = {};
+
+                                if (values.password !== values.re_password){
+                                    errors.re_password = 'Fjalkalimet nuk jan te njejta.'
+                                }
+
+                                if(values.password.length < 8){
+                                    errors.password = 'Fjalkalimi duhet te ket te pakten 10 karaktere.'
+                                }
+
+                                return errors;
+                            }}
                             >
-                            {({ values, handleChange, handleBlur, handleSubmit }) => (
-                                <Form method="POST" onSubmit={handleSubmit}>
+                            {() => (
+                                <Form method="POST">
                                     <Flex my={8} textAlign='left' flexDir="column">
                                         <Heading mb={8} fontSize={40} fontWeight="500">Regjistrohu</Heading>
-                                        <FormControl>
-                                                <FormLabel>Username</FormLabel>
-                                                <Input value={values.username} onChange={handleChange} onBlur={handleBlur} type='username' placeholder='Vendosni usernamin tuaj'/>
-                                        </FormControl>
-                                        <FormControl>
-                                                <FormLabel mt={4}>Email</FormLabel>
-                                                <Input onChange={e => onChange(e)} type='email' id='email' placeholder='Vendosni adresen tuaj te emailit' />
-                                        </FormControl>
-                                        <FormControl mt={4}>
-                                            <FormLabel>Password</FormLabel>
-                                            <Input onChange={e => onChange(e)} type='password' id='password' placeholder='Vendosni passwordin tuaj' />
-                                        </FormControl>
-                                        <FormControl mt={4}>
-                                            <FormLabel>Konfirmoni Passwordin</FormLabel>
-                                            <Input onChange={e => onChange(e)} type='password' id='re_password' placeholder='Konfirmoni passwordin tuaj' />
-                                        </FormControl>
+                                        <Field name="username">
+                                            {({field, form}) => (
+                                                <FormControl isRequired>
+                                                    <FormLabel>Username</FormLabel>
+                                                    <Input {...field} id="username" type='text' placeholder='Vendosni usernamin tuaj'/>
+                                                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                                                </FormControl>
+                                            )}
+                                        </Field>
+                                        
+                                        <Field name="email">
+                                            {({field, form}) => (
+                                                <FormControl mt={4} isRequired>
+                                                    <FormLabel>Email</FormLabel>
+                                                    <Input {...field} id="email" type='email' placeholder='Vendosni adresen tuaj te emailit'/>
+                                                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                                                </FormControl>
+                                            )}
+                                        </Field>
+
+                                        <Field name="password">
+                                            {({field, form}) => (
+                                                <FormControl mt={4} isInvalid={form.errors.password && form.touched.password} isRequired>
+                                                    <FormLabel>Fjalkalimi</FormLabel>
+                                                    <Input {...field} id="password" type='password' placeholder='Vendosni fjalkalimin tuaj' />
+                                                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                                </FormControl>
+                                            )}
+                                        </Field>
+
+                                        <Field name="re_password">
+                                            {({field, form}) => (
+                                                <FormControl mt={4} isInvalid={form.errors.re_password && form.touched.re_password} isRequired>
+                                                    <FormLabel>Konfirmoni fjalkalimin</FormLabel>
+                                                    <Input {...field} id="re_password" type='password' placeholder='Konfirmoni fjalkalimin tuaj' />
+                                                    <FormErrorMessage>{form.errors.re_password}</FormErrorMessage>
+                                                </FormControl>
+                                            )}
+                                        </Field>
+
                                         <Button onClick={onOpen} my={6} colorScheme="blue" variant="link" w="inherit">
                                             <Text fontSize={14} isTruncated w="500px">Duke u regjistruar ju pranoni Kushtet e Shërbimit, Politikat e Privatësisë dhe Politikat e Përdorimit.</Text>
                                         </Button>
@@ -141,7 +157,8 @@ const SignUp = ({ signup, isAuthenticated }) => {
                                             <Button colorScheme="blue" variant="outline" width='full' >Identifikohu</Button>
                                         </Link>
                                     </Flex>
-                                    <pre>{JSON.stringify(values, null, 2)}</pre>
+                                    {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+                                    <pre>{JSON.stringify(errors, null, 2)}</pre> */}
                                 </Form>
                             )}
                         </Formik>

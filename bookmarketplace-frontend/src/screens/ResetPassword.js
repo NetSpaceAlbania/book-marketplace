@@ -81,7 +81,7 @@ const ResetPassword = (props) => {
                     <Box p={4}>
                         <form method="POST" onSubmit={e => onSubmit(e)}>
                             <Flex my={8} textAlign='left' flexDir="column">
-                                <FormControl>
+                                <FormControl isRequired>
                                     <Heading mb={8} fontSize={40} fontWeight="500">Rikthe Fjalkalimin</Heading>
                                     <FormLabel>Email</FormLabel>
                                     <Input isRequired 
