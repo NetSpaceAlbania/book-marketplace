@@ -47,82 +47,65 @@ const SignIn = ({signin, isAuthenticated}) => {
                         bg="white"
                     >
                         <Box p={4}>
-                                <Formik 
-                                    initialValues={{ email: '', password: '' }}
-                                    onSubmit={e => {console.log(e); 
-                                        const { email, password } = e;
+                            <Formik 
+                                initialValues={{ email: '', password: '' }}
+                                onSubmit={e => {console.log(e); 
+                                    const { email, password } = e;
 
-                                        signin(email, password);
-                                    }}
-                                    validate={values => {
-                                        const errors = {};
+                                    signin(email, password);
+                                }}
+                                validate={values => {
+                                    const errors = {};
 
-                                        return errors;
-                                    }}
-                                    >
-                                    {() => (
-                                        <Form method="POST">
-                                            <Flex my={8} textAlign='left' flexDir="column">
-                                                <Heading mb={8} fontSize={40} fontWeight="500">Identifikohu</Heading>
+                                    return errors;
+                                }}
+                                >
+                                {() => (
+                                    <Form method="POST">
+                                        <Flex my={8} textAlign='left' flexDir="column">
+                                            <Heading mb={8} fontSize={40} fontWeight="500">Identifikohu</Heading>
 
-                                                <Field name="email">
-                                                    {({field, form}) => (
-                                                        <FormControl mt={4} isInvalid={form.errors.email && form.touched.email} isRequired>
-                                                            <FormLabel>Email</FormLabel>
-                                                            <Input {...field} id="email" type='email' placeholder='Vendosni adresen tuaj te emailit' />
-                                                            <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                                                        </FormControl>
-                                                    )}
-                                                </Field>
+                                            <Field name="email">
+                                                {({field, form}) => (
+                                                    <FormControl mt={4} isInvalid={form.errors.email && form.touched.email} isRequired>
+                                                        <FormLabel>Email</FormLabel>
+                                                        <Input {...field} id="email" type='email' placeholder='Vendosni adresen tuaj te emailit' />
+                                                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
 
-                                                <Field name="password">
-                                                    {({field, form}) => (
-                                                        <FormControl mt={4} isInvalid={form.errors.password && form.touched.password} isRequired>
-                                                            <FormLabel>Fjalkalimin</FormLabel>
-                                                            <Input {...field} id="password" type='password' placeholder='Vendosni fjalkalimin tuaj' />
-                                                            <FormErrorMessage>{form.errors.password}</FormErrorMessage>
-                                                        </FormControl>
-                                                    )}
-                                                </Field>
+                                            <Field name="password">
+                                                {({field, form}) => (
+                                                    <FormControl mt={4} isInvalid={form.errors.password && form.touched.password} isRequired>
+                                                        <FormLabel>Fjalkalimin</FormLabel>
+                                                        <Input {...field} id="password" type='password' placeholder='Vendosni fjalkalimin tuaj' />
+                                                        <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
 
-                                                <Box alignSelf="flex-end" w="inherit">
-                                                    <Link to="/resetpassword">
-                                                        <Button my={6} colorScheme="blue" variant="link">Keni harruar fjalkalimin?</Button>
-                                                    </Link>
-                                                </Box>
-                                                <Button type='submit' colorScheme="blue" variant="solid" width='full' >Identifikohu</Button>
-                                                <Flex align="center">
-                                                    <Divider my={8}/>
-                                                    <Text fontSize={16} color="gray.400" mx={6}>ose</Text>
-                                                    <Divider my={8}/>
-                                                </Flex>
-                                                <Link to="/signup">
-                                                    <Button colorScheme="blue" variant="outline" width='full' >Regjistrohu</Button>
+                                            <Box alignSelf="flex-end" w="inherit">
+                                                <Link to="/resetpassword">
+                                                    <Button my={6} colorScheme="blue" variant="link">Keni harruar fjalkalimin?</Button>
                                                 </Link>
+                                            </Box>
+                                            <Button type='submit' colorScheme="blue" variant="solid" width='full' >Identifikohu</Button>
+                                            <Flex align="center">
+                                                <Divider my={8}/>
+                                                <Text fontSize={16} color="gray.400" mx={6}>ose</Text>
+                                                <Divider my={8}/>
                                             </Flex>
-                                            {/* <pre>{JSON.stringify(values, null, 2)}</pre>
-                                            <pre>{JSON.stringify(errors, null, 2)}</pre> */}
-                                        </Form>
-                                    )}
-                                </Formik>
-                            </Box>
-                        {/*
-                            <form method="POST" onSubmit={e => onSubmit(e)}>
-                                <Flex my={8} textAlign='left' flexDir="column">
-                                    <FormControl>
-                                    <Heading mb={8} fontSize={40} fontWeight="500">Identifikohu</Heading>
-                                    <FormLabel>Email</FormLabel>
-                                    <Input id='email' onChange={e => onChange(e)} type='email' placeholder='Vendosni adresen tuaj te emailit' />
-                                    </FormControl>
-
-                                    <FormControl mt={4}>
-                                    <FormLabel>Password</FormLabel>
-                                    <Input id='password' onChange={e => onChange(e)} type='password' placeholder='Vendosni passwordin tuaj' />
-                                    </FormControl>
-
-                                </Flex>
-                            </form>
-                       */}
+                                            <Link to="/signup">
+                                                <Button colorScheme="blue" variant="outline" width='full' >Regjistrohu</Button>
+                                            </Link>
+                                        </Flex>
+                                        {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+                                        <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+                                    </Form>
+                                )}
+                            </Formik>
+                        </Box>
                     </Box>
                 </Flex>
             </Flex>

@@ -17,7 +17,9 @@ import {
     AUTHENTICATED_SUCCESS
 } from './types';
 
+
 export const checkAuthenticated = () => async dispatch => {
+
     if (typeof window == 'undefined') {
         dispatch({
             type: AUTHENTICATED_FAIL
@@ -34,7 +36,7 @@ export const checkAuthenticated = () => async dispatch => {
         const body = JSON.stringify({ token: localStorage.getItem('access') });
     
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/verify/`, body, config);
+            const res = await axios.post(`http://localhost:8000/auth/jwt/verify/`, body, config);
     
             if (res.data.code !== 'token_not_valid') {
                 dispatch({
@@ -68,7 +70,7 @@ export const load_user = () => async dispatch => {
         };
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
+            const res = await axios.get(`http://localhost:8000/auth/users/me/`, config);
 
             dispatch({
                 type: USER_LOADED_SUCCESS,
@@ -96,7 +98,7 @@ export const signin = (email, password) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config);
+        const res = await axios.post(`http://localhost:8000/auth/jwt/create/`, body, config);
 
         dispatch({
             type: SIGNIN_SUCCESS,
@@ -111,17 +113,17 @@ export const signin = (email, password) => async dispatch => {
     }
 };
 
-export const signup = ({ username, email, password, re_password }) => async dispatch => {
+export const signup = ({ name, email, password, re_password }) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ username, email, password, re_password }); 
+    const body = JSON.stringify({ name, email, password, re_password }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config);
+        const res = await axios.post(`http://localhost:8000/auth/users/`, body, config);
 
         dispatch({
             type: SIGNUP_SUCCESS,
@@ -144,7 +146,7 @@ export const verify = (uid, token) => async dispatch => {
     const body = JSON.stringify({ uid, token }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`, body, config);
+        const res = await axios.post(`http://localhost:8000/auth/users/activation/`, body, config);
 
         dispatch({
             type: ACTIVATION_SUCCESS,
@@ -167,7 +169,7 @@ export const reset_password = (email) => async dispatch => {
     const body = JSON.stringify({ email }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/`, body, config);
+        const res = await axios.post(`http://localhost:8000/auth/users/reset_password/`, body, config);
 
         dispatch({
             type: RESET_PASSWORD_SUCCESS,
@@ -190,7 +192,7 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
     const body = JSON.stringify({ uid, token, new_password, re_new_password }); 
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`, body, config);
+        const res = await axios.post(`http://localhost:8000/auth/users/reset_password_confirm/`, body, config);
 
         dispatch({
             type: RESET_PASSWORD_CONFIRM_SUCCESS,

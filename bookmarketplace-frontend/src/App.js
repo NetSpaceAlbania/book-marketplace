@@ -4,6 +4,7 @@ import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import ResetPassword from './screens/ResetPassword';
 import ResetPasswordConfirm from './screens/ResetPasswordConfirm';
+import Activate from './screens/Activate';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/resetpassword" component={ResetPassword}/>
             <Route exact path="/resetpassword/confirm/:uid/:token" component={ResetPasswordConfirm}/>
+            <Route exact path='/activate/:uid/:token' component={Activate} />
             <Route exact path='*'>
               <h1>404 Not Found</h1>
             </Route>

@@ -61,10 +61,10 @@ const SignUp = ({ signup, isAuthenticated }) => {
                     >
                         <Box p={4}>
                         <Formik 
-                            initialValues={{ username: '', email: '', password: '', re_password: '' }}
+                            initialValues={{ name: '', email: '', password: '', re_password: '' }}
                             onSubmit={e => {console.log(e); 
-                                const { username, email, password, re_password } = e;
-                                signup({ username, email, password, re_password });
+                                const { name, email, password, re_password } = e;
+                                signup({ name, email, password, re_password });
                                 setAccountCreated(true);
                             }}
                             validate={values => {
@@ -85,12 +85,12 @@ const SignUp = ({ signup, isAuthenticated }) => {
                                 <Form method="POST">
                                     <Flex my={8} textAlign='left' flexDir="column">
                                         <Heading mb={8} fontSize={40} fontWeight="500">Regjistrohu</Heading>
-                                        <Field name="username">
+                                        <Field name="name">
                                             {({field, form}) => (
                                                 <FormControl isRequired>
-                                                    <FormLabel>Username</FormLabel>
-                                                    <Input {...field} id="username" type='text' placeholder='Vendosni usernamin tuaj'/>
-                                                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                                                    <FormLabel>Emri</FormLabel>
+                                                    <Input {...field} id="name" type='text' placeholder='Vendosni usernamin tuaj'/>
+                                                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                                                 </FormControl>
                                             )}
                                         </Field>
