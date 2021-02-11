@@ -62,7 +62,7 @@ const SignUp = ({ signup, isAuthenticated }) => {
                         <Box p={4}>
                         <Formik 
                             initialValues={{ name: '', email: '', password: '', re_password: '' }}
-                            onSubmit={e => {console.log(e); 
+                            onSubmit={e => {
                                 const { name, email, password, re_password } = e;
                                 signup({ name, email, password, re_password });
                                 setAccountCreated(true);

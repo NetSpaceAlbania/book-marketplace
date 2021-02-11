@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/resetpassword" component={ResetPassword}/>
             <Route exact path="/resetpassword/confirm/:uid/:token" component={ResetPasswordConfirm}/>
-            <Route exact path='/activate/:uid/:token' component={Activate} />
+            <Route exact path="/activate/:uid/:token" component={Activate} />
             <Route exact path='*'>
               <h1>404 Not Found</h1>
             </Route>

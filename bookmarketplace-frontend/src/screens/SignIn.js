@@ -49,7 +49,7 @@ const SignIn = ({signin, isAuthenticated}) => {
                         <Box p={4}>
                             <Formik 
                                 initialValues={{ email: '', password: '' }}
-                                onSubmit={e => {console.log(e); 
+                                onSubmit={e => {
                                     const { email, password } = e;
 
                                     signin(email, password);
