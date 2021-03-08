@@ -179,3 +179,5 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
 
 ]
+
+FILE_UPLOAD_PERMISSIONS=0o640

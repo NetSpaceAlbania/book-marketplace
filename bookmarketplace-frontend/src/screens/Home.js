@@ -12,7 +12,7 @@ const Home = () => {
                 <GridItem colSpan={2}>
                     <Filter/>
                 </GridItem>
-                <GridItem colSpan={6} bg="#FBFBFB">
+                <GridItem colSpan={6} bg="#F7FAFC">
                     <Listings/>
                 </GridItem>
             </Grid>

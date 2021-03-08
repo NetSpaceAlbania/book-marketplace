@@ -34,7 +34,7 @@ const ResetPasswordConfirm = (props) => {
                 <Flex gridColumn="span 3" bg="#263772" alignItems="center" justifyContent="center">
                     <Image boxSize="450px" src={bookIllustation} alt="bookIllustation"/>
                 </Flex>
-                <Flex gridColumn="span 4" bg="#FBFBFB">
+                <Flex gridColumn="span 4" bg="#F7FAFC">
                     <Flex minHeight='calc(100vh - 80px)' width='full' align='center' justifyContent='center'>
                         <Box 
                             borderWidth={1}
