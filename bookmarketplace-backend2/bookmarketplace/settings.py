@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,14 +90,14 @@ DATABASES = {
 }
 
 # EMAIL
-# email account: robert.johns7016@gmail.com
-# email pass: lkiomucgaygcptbh
+# email account: hackerspacealbania1@gmail.com
+# email pass: zwmszkcyrjictqfj
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'robert.johns7016@gmail.com'
-EMAIL_HOST_PASSWORD = 'lkiomucgaygcptbh'
+EMAIL_HOST_USER = 'hackerspacealbania1@gmail.com'
+EMAIL_HOST_PASSWORD = 'zwmszkcyrjictqfj'
 EMAIL_USE_TLS = True
 
 # Password validation
@@ -141,6 +142,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -181,3 +185,8 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 FILE_UPLOAD_PERMISSIONS=0o640
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
