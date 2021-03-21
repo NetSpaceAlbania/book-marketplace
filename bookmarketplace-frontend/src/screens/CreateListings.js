@@ -234,27 +234,27 @@ const CreateListings = () => {
                                         </Flex>
                                         {/* <pre>{JSON.stringify(values, null, 2)}</pre>
                                         <pre>{JSON.stringify(errors, null, 2)}</pre> */}
-                                        <Box
-                                px={{ base: 4, sm: 6 }}
-                                py={3}
-                                bg={useColorModeValue("gray.50", "gray.900")}
-                                textAlign="right"
-                                    >
-                                    
-                                    </Box>
-                                    <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
-                                    <Box>
-                                        <SimpleGrid
-                                        display={{ base: "initial", md: "grid" }}
-                                        columns={{ md: 3 }}
-                                        spacing={{ md: 6 }}
-                                        >
-                                        <GridItem mt={[5, null, 0]} colSpan={{ md: 2 }}>
+                                        {/* <Box
+                                            px={{ base: 4, sm: 6 }}
+                                            py={3}
+                                            bg={useColorModeValue("gray.50", "gray.900")}
+                                            textAlign="right"
+                                                >
+                                                
+                                                </Box>
+                                                    <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
+                                                    <Box>
+                                                    <SimpleGrid
+                                                    display={{ base: "initial", md: "grid" }}
+                                                    columns={{ md: 3 }}
+                                                    spacing={{ md: 6 }}
+                                                    >
+                                                    <GridItem mt={[5, null, 0]} colSpan={{ md: 2 }}>
 
-                                        </GridItem>
-                                        </SimpleGrid>
-                                    </Box>
-                                </Box>
+                                                    </GridItem>
+                                                    </SimpleGrid>
+                                                </Box>
+                                            </Box> */}
                                     </Form>
                                     
                                 )}
