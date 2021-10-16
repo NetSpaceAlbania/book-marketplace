@@ -154,16 +154,6 @@ function CreateNotifications() {
                                                     </FormControl>
                                                 )}
                                             </Field>
-
-                                            <Field name="instaUsername">
-                                                {({field, form}) => (
-                                                    <FormControl mt={4} isInvalid={form.errors.instaUsername && form.touched.instaUsername} isRequired>
-                                                        <FormLabel>Instagram Username</FormLabel>
-                                                        <Input {...field} id="instaUsername" type='number' placeholder='' />
-                                                        <FormErrorMessage>{form.errors.instaUsername}</FormErrorMessage>
-                                                    </FormControl>
-                                                )}
-                                            </Field>
                                         </Flex>
                                     </Flex>
                             {/* </Flex> */}
