@@ -153,6 +153,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
+   "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+   "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 DJOSER = {
@@ -185,8 +187,3 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 FILE_UPLOAD_PERMISSIONS=0o640
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-}
