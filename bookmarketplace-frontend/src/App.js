@@ -8,6 +8,7 @@ import Activate from './screens/Activate';
 import DetailedListings from './screens/DetailedListings';
 import CreateListings from './screens/CreateListings';
 import MyListings from './screens/MyListings';
+import CreateNotifications from './screens/CreateNotifications'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
@@ -30,6 +31,7 @@ function App() {
             <Route exact path="/resetpassword" component={ResetPassword}/>
             <Route exact path="/resetpassword/confirm/:uid/:token" component={ResetPasswordConfirm}/>
             <Route exact path="/activate/:uid/:token" component={Activate} />
+            <Route exact path="/createnotifications" component={CreateNotifications}/>
             <Route exact path='*'>
               <h1>404 Not Found</h1>
             </Route>
