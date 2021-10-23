@@ -35,7 +35,7 @@ const NavBM = ({logout, isAuthenticated}) => {
                 <Button colorScheme="blue" variant="outline">Kerko</Button>
             </Flex>
             <Flex align="center">
-                <Link to="/signin">
+                <Link to={isAuthenticated ? "/createlistings" : "/signin"}>
                     <Button colorScheme="blue" variant="solid">
                     + Krijo nje njoftim
                     </Button>
