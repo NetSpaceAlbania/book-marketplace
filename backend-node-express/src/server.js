@@ -1,6 +1,12 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import listingsRouter from "./services/listings/index.js";
+import {
+  notFoundHandler,
+  badRequestHandler,
+  forbiddenHandler,
+  genericServerErrorHandler,
+} from "./errorHandling.js";
 
 const server = express();
 
@@ -9,6 +15,13 @@ server.use(express.json()); //this has to be specified BEFORE the routes, otherw
 // ******************* ENDPOINTS ***************************************************
 // a Router is set of endpoints that share something like a prefix (listingsRouter is going to share "/listings" as a prefix")
 server.use("/listings", listingsRouter);
+
+// *********************** ERROR MIDDLEWARES ***************************
+// always to be defined after all the routes
+server.use(notFoundHandler);
+server.use(badRequestHandler);
+server.use(forbiddenHandler);
+server.use(genericServerErrorHandler);
 
 console.table(listEndpoints(server));
 

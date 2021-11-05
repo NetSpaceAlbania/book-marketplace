@@ -11,43 +11,41 @@
 import express from "express";
 import uniqid from "uniqid";
 import createHttpError from "http-errors";
+import { validationResult } from "express-validator";
+import { validateListing } from "../../validation/validation.js";
 import { readListings, writeListings } from "../../lib/fs-tools.js";
 
 const listingsRouter = express.Router();
 
 // ************* CREATE A NEW LISTING ******************
 listingsRouter.post("/", (req, res, next) => {
-    const { body } = req;
-    const { title, description, price, image } = body;
-    const listing = {
-      id: uniqid(),
-      title,
-      description,
-      price,
-      image
-    };
-    writeListings(listing);
-    res.send(listing);
-  });
-
-  // ********* GET LISTING BY ID ********************
-  listingsRouter.get("/:id", async (req, res, next) => {
-    try {
-      // save request params id in a variable
-      const paramsId = req.params.id;
-      // 1. Read the content of the listings.json file
-      const listings = await readListings();
-  
-      // find the listing with the id requested
-      const listing = listings.find((listing) => listing._id === paramsId);
-  
-      if (listing) {
-        res.status(200).send(listing);
-      } else {
-        next(createHttpError(404, `listing with id ${paramsId} not found`));
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    const errorList = validationResult(req);
+    if (errorList.isEmpty()) {
+      // read the the content of listings.json
+      const listings = readListings();
+      // read the requests body
+      const newListing = {
+        id: uniqid(),
+        ...req.body,
+        createdAt: new Date(),
+      };
+      // push the new listing to the listings array
+      listings.push(newListing);
+      // write the new listings array to the file listings.json
+       writeListings(listings);
+      // send the new listing to the client
+      res.status(201).send(newListing);
+    } else {
+      next(createError(400, { errorList }));
     }
-  });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+// ********* GET LISTING BY ID ********************
+// listingsRouter.get("/:id", async (req, res, next) => {});
+
 export default listingsRouter;
