@@ -15,7 +15,10 @@ const { readJSON, writeJSON, writeFile, readFile } = fs;
 // 3. I can concatenate the parent folder path withj authors json --> C:\Users\emili\Desktop\book-marketplace-hackerspace\src\services\authors\authors.json
 // const authorsJsonPath = join(parentFolder, "authors.json");
 
-const listingsJsonPath = join(dirname(fileURLToPath(import.meta.url)), "./listings/listings.json");
+const listingsJsonPath = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "../listings/listings.json"
+);
 
 // **********************/ How to read & write on disk **********************
 export const readListings = async () => {

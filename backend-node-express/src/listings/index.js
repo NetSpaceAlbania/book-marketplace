@@ -11,7 +11,7 @@
 import express from "express";
 import uniqid from "uniqid";
 import createHttpError from "http-errors";
-// import { readListings, writeListings } from "../lib/fs-tools.js";
+import { readListings, writeListings } from "../lib/fs-tools.js";
 
 const listingsRouter = express.Router();
 
@@ -26,7 +26,7 @@ listingsRouter.post("/", (req, res, next) => {
       price,
       image
     };
-    // writeListings(listing);
+    writeListings(listing);
     res.send(listing);
   });
 
