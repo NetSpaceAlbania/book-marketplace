@@ -1,6 +1,6 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
-import listingsRouter from "./listings/index.js";
+import listingsRouter from "./services/listings/index.js";
 
 const server = express();
 

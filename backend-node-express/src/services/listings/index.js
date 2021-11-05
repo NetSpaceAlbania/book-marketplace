@@ -11,11 +11,11 @@
 import express from "express";
 import uniqid from "uniqid";
 import createHttpError from "http-errors";
-import { readListings, writeListings } from "../lib/fs-tools.js";
+import { readListings, writeListings } from "../../lib/fs-tools.js";
 
 const listingsRouter = express.Router();
 
-// ************* GET ALL LISTINGS ******************
+// ************* CREATE A NEW LISTING ******************
 listingsRouter.post("/", (req, res, next) => {
     const { body } = req;
     const { title, description, price, image } = body;
@@ -30,4 +30,24 @@ listingsRouter.post("/", (req, res, next) => {
     res.send(listing);
   });
 
+  // ********* GET LISTING BY ID ********************
+  listingsRouter.get("/:id", async (req, res, next) => {
+    try {
+      // save request params id in a variable
+      const paramsId = req.params.id;
+      // 1. Read the content of the listings.json file
+      const listings = await readListings();
+  
+      // find the listing with the id requested
+      const listing = listings.find((listing) => listing._id === paramsId);
+  
+      if (listing) {
+        res.status(200).send(listing);
+      } else {
+        next(createHttpError(404, `listing with id ${paramsId} not found`));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
 export default listingsRouter;
