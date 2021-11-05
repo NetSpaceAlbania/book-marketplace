@@ -17,7 +17,17 @@ const listingsRouter = express.Router();
 
 // ************* GET ALL LISTINGS ******************
 listingsRouter.post("/", (req, res, next) => {
-  
-});
+    const { body } = req;
+    const { title, description, price, image } = body;
+    const listing = {
+      id: uniqid(),
+      title,
+      description,
+      price,
+      image
+    };
+    // writeListings(listing);
+    res.send(listing);
+  });
 
 export default listingsRouter;
