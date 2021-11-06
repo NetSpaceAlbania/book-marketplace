@@ -14,7 +14,13 @@ import createHttpError from "http-errors";
 import { validationResult } from "express-validator";
 import { validateListing } from "../../validation/listingValidation.js";
 import multer from "multer";
-import { readListings, writeListings, saveImageClodinary } from "../../lib/fs-tools.js";
+import {
+  readListings,
+  writeListings,
+  saveImageClodinary,
+} from "../../lib/fs-tools.js";
+import { pipeline } from "stream";
+import json2csv from "json2csv";
 
 const listingsRouter = express.Router();
 
@@ -202,11 +208,11 @@ listingsRouter.get("/search", async (req, res, next) => {
   }
 });
 
-// UPLOAD IMAGES
+// **************UPLOAD IMAGES************************
 // FS METHOD
 // listingsRouter.post("/:id/images", upload.single("image"), async (req, res, next) => {
 //   try {
-  // const paramsId = req.params.id;
+// const paramsId = req.params.id;
 //     // read the the content of listings.jsons
 //     const listings = await readListings();
 //     // find the listing with the id in the request params
@@ -231,32 +237,54 @@ listingsRouter.get("/search", async (req, res, next) => {
 // });
 
 // CLOUDINARY METHOD
-listingsRouter.post("/:id/upload/images", multer({storage: saveImageClodinary}).single("image"), async (req, res, next) =>{
-  try {
-    // save request params id in a variable
-    const paramsId = req.params.id;
-    // read the the content of listings.jsons
-    const listings = await readListings();
-    // find the listing with the id in the request params
-    const listing = listings.find((listing) => listing.id === paramsId);
-    // if the listing is found
-    if (listing) {
-      const imagePath = req.file.path;
-      const updatedImage = {...listing, image: imagePath};
-      const remainingListings = listings.filter(
-        (listing) => listing.id !== paramsId
-      );
-      remainingListings.push(updatedImage);
-      await writeListings(remainingListings);
+listingsRouter.post(
+  "/:id/upload/images",
+  multer({ storage: saveImageClodinary }).single("image"),
+  async (req, res, next) => {
+    try {
+      // save request params id in a variable
+      const paramsId = req.params.id;
+      // read the the content of listings.jsons
+      const listings = await readListings();
+      // find the listing with the id in the request params
+      const listing = listings.find((listing) => listing.id === paramsId);
+      // if the listing is found
+      if (listing) {
+        const imagePath = req.file.path;
+        const updatedImage = { ...listing, image: imagePath };
+        const remainingListings = listings.filter(
+          (listing) => listing.id !== paramsId
+        );
+        remainingListings.push(updatedImage);
+        await writeListings(remainingListings);
 
-      res.status(200).send(updatedImage);
-    } else {
-      next(createHttpError(404, `Listing with id: ${paramsId} was not found`));
+        res.status(200).send(updatedImage);
+      } else {
+        next(
+          createHttpError(404, `Listing with id: ${paramsId} was not found`)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
     }
-  } catch (error) {
-    console.log(error);
-    next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
   }
-})
+);
+
+// ********* EXPORT CSV FILE ********************
+listingsRouter.get("/download/csv", async (req, res, next) => {
+  try {
+    res.setHeader("Content-Disposition", `attachment; filename=listings.csv`);
+
+    const source = await getListingsReadableStream();
+    const transform = new json2csv.Transform({
+      fields: ["id", "title", "description", "price"],
+    });
+    const destination = res;
+    pipeline(source, transform, destination, (err) => {
+      if (err) next(err);
+    });
+  } catch (error) {}
+});
 
 export default listingsRouter;

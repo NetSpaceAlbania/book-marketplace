@@ -1,1 +1,44 @@
-[{"id":"4n871uwkvmwf46m","title":"Analize Matematike 3","description":"Bla bla bla 3","price":"103"},{"id":"4n879skkvn1eybe","title":"Analize Matematike 3","description":"Bla bla bla 3","price":"103","createdAt":"2021-11-05T23:57:13.657Z"},{"id":"4n8792skvn1rig4","title":"Analize Matematike","description":"Bla bla bla","price":"103","createdAt":"2021-11-06T00:06:59.619Z"},{"id":"4n879f8kvn1x4ep","title":"Analize Matematike","description":"Bla bla bla","price":"103","createdAt":"2021-11-06T00:11:21.360Z"},{"id":"4n879f8kvn1x9mo","title":"Analize Matematike","description":"Bla bla bla","price":"103","createdAt":"2021-11-06T00:11:28.128Z"},{"id":"4n87a24kvn1eafd","title":"Analize Matematike e Avancuar Pjesa e Trete","description":"Bla bla bla","price":"103","createdAt":"2021-11-05T23:56:42.696Z","image":"https://res.cloudinary.com/dqiyjy9ye/image/upload/v1636201683/book-marketplace-hackerspace/images/mhwmvklr9qhv5r5jagof.jpg"}]
+[
+  {
+    "id": "4n871uwkvmwf46m",
+    "title": "Analize Matematike 3",
+    "description": "Bla bla bla 3",
+    "price": "103"
+  },
+  {
+    "id": "4n879skkvn1eybe",
+    "title": "Analize Matematike 3",
+    "description": "Bla bla bla 3",
+    "price": "103",
+    "createdAt": "2021-11-05T23:57:13.657Z"
+  },
+  {
+    "id": "4n8792skvn1rig4",
+    "title": "Analize Matematike",
+    "description": "Bla bla bla",
+    "price": "103",
+    "createdAt": "2021-11-06T00:06:59.619Z"
+  },
+  {
+    "id": "4n879f8kvn1x4ep",
+    "title": "Analize Matematike",
+    "description": "Bla bla bla",
+    "price": "103",
+    "createdAt": "2021-11-06T00:11:21.360Z"
+  },
+  {
+    "id": "4n879f8kvn1x9mo",
+    "title": "Analize Matematike",
+    "description": "Bla bla bla",
+    "price": "103",
+    "createdAt": "2021-11-06T00:11:28.128Z"
+  },
+  {
+    "id": "4n87a24kvn1eafd",
+    "title": "Analize Matematike e Avancuar Pjesa e Trete",
+    "description": "Bla bla bla",
+    "price": "103",
+    "createdAt": "2021-11-05T23:56:42.696Z",
+    "image": "https://res.cloudinary.com/dqiyjy9ye/image/upload/v1636201683/book-marketplace-hackerspace/images/mhwmvklr9qhv5r5jagof.jpg"
+  }
+]

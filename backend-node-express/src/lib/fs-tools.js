@@ -5,9 +5,16 @@ import { dirname, join } from "path"; // core modules(no need to install). dirna
 import { v2 as cloudinary } from "cloudinary"; // cloudinary module (needs to install)
 import { CloudinaryStorage } from "multer-storage-cloudinary"; // cloudinary module (needs to install)
 
-
 // fs cool stuff to read & write on disk
-const { readJSON, writeJSON, writeFile, readFile, remove } = fs;
+const {
+  readJSON,
+  writeJSON,
+  writeFile,
+  readFile,
+  remove,
+  createReadStream,
+  createWriteStream,
+} = fs;
 
 //*****************/ How to find the path*****************
 // 1. I'll start from the current file I'm right now. (C_//.........../authors/index.js)
@@ -35,6 +42,8 @@ export const imagesFolderPath = join(
 // ********************** LISTINGS **********************
 export const readListings = () => readJSON(listingsJsonPath);
 export const writeListings = (content) => writeJSON(listingsJsonPath, content);
+export const getListingsReadableStream = () =>
+  createReadStream(listingsJsonPath);
 
 // ********************** IMAGES **********************
 // FS METHOD
@@ -52,4 +61,4 @@ export const saveImageClodinary = new CloudinaryStorage({
     allowedFormats: ["jpg", "png"],
     // transformation: [{ width: 500, height: 500, crop: "limit" }],
   },
-})
+});
