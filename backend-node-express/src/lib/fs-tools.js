@@ -17,24 +17,10 @@ const { readJSON, writeJSON, writeFile, readFile } = fs;
 
 const listingsJsonPath = join(
   dirname(fileURLToPath(import.meta.url)),
-  "../listings/listings.json"
+  "../data/listings.json"
 );
 
 // **********************/ How to read & write on disk **********************
-export const readListings = async () => {
-  try {
-    const listings = await readJSON(listingsJsonPath);
-    return listings;
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-};
+export const readListings = () => readJSON(listingsJsonPath);
 
-export const writeListings = async (listings) => {
-  try {
-    await writeJSON(listingsJsonPath, listings);
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const writeListings = (content) => writeJSON(listingsJsonPath, content);
