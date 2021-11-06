@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import listingsRouter from "./services/listings/index.js";
 import {
