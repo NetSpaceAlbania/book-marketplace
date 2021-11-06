@@ -179,4 +179,26 @@ listingsRouter.delete("/:id", async (req, res, next) => {
     next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
   }
 });
+
+// ********* SEARCH FOR A SPECIFIC LISTING ********************
+listingsRouter.get("/search", async (req, res, next) => {
+  try {
+    // read the the content of listings.jsons
+    const listings = await readListings();
+    // find the listing with the id in the request params
+    const searchListings = listings.filter((listing) =>
+      listing.title.toLowerCase().includes(req.query.q.toLowerCase())
+    );
+    // if the listing is found send it to the client
+    if (searchListings) {
+      res.status(200).send(searchListings);
+    } else {
+      next(createHttpError(404, "Listing not found"));
+    }
+  } catch (error) {
+    console.log(error);
+    next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+  }
+});
+
 export default listingsRouter;
