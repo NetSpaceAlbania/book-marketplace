@@ -202,6 +202,29 @@ listingsRouter.get("/search", async (req, res, next) => {
 });
 
 // UPLOAD IMAGES
-// 
+// listingsRouter.post("/:id/images", upload.single("image"), async (req, res, next) => {
+//   try {
+//     // read the the content of listings.jsons
+//     const listings = await readListings();
+//     // find the listing with the id in the request params
+//     const listing = listings.find((listing) => listing.id === req.params.id);
+//     // if the listing is found
+//     if (listing) {
+//       // save the image in the images folder
+//       const image = req.file;
+//       // save the image path in the listing object
+//       listing.images.push(image.path);
+//       // save the updated listing to the listings.json file
+//       await writeListings(listings);
+//       // send the updated listing to the client
+//       res.status(200).send(listing);
+//     } else {
+//       next(createHttpError(404, "Listing not found"));
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+//   }
+// });
 
 export default listingsRouter;
