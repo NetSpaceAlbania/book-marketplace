@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import listingsRouter from "./services/listings/index.js";
 import {
@@ -8,7 +9,8 @@ import {
   genericServerErrorHandler,
 } from "./errorHandling.js";
 
-const server = express();
+const server = express(); //this has to be specified BEFORE the routes, otherwise the body will be undefined
+server.use(cors()); //cors connects BE with FE *** the same as app.use(cors());
 
 server.use(express.json()); //this has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
 
