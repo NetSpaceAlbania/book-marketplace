@@ -2,6 +2,10 @@ import fs from "fs-extra";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
+import { v2 as cloudinary } from "cloudinary"; 
+import { CloudinaryStorage } from "multer-storage-cloudinary"; 
+
+
 // fs cool stuff to read & write on disk
 const { readJSON, writeJSON, writeFile, readFile, remove } = fs;
 
@@ -33,9 +37,19 @@ export const readListings = () => readJSON(listingsJsonPath);
 export const writeListings = (content) => writeJSON(listingsJsonPath, content);
 
 // ********************** IMAGES **********************
+// FS METHOD
 // SAVE IMAGE
 export const saveImage = (imageName, content) =>
   writeFile(join(imagesFolderPath, imageName), content); // content is buffer
 // REMOVE IMAGE
 export const removeImage = (imageName) =>
   remove(join(imagesFolderPath, imageName));
+// CLOUDINARY METHOD
+export const saveImageClodinary = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "book-marketplace-hackerspace",
+    allowedFormats: ["jpg", "png"],
+    // transformation: [{ width: 500, height: 500, crop: "limit" }],
+  },
+})
