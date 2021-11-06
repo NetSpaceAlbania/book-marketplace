@@ -13,7 +13,8 @@ import uniqid from "uniqid";
 import createHttpError from "http-errors";
 import { validationResult } from "express-validator";
 import { validateListing } from "../../validation/listingValidation.js";
-import { readListings, writeListings } from "../../lib/fs-tools.js";
+import multer from "multer";
+import { readListings, writeListings, saveImageClodinary } from "../../lib/fs-tools.js";
 
 const listingsRouter = express.Router();
 
@@ -202,12 +203,14 @@ listingsRouter.get("/search", async (req, res, next) => {
 });
 
 // UPLOAD IMAGES
+// FS METHOD
 // listingsRouter.post("/:id/images", upload.single("image"), async (req, res, next) => {
 //   try {
+  // const paramsId = req.params.id;
 //     // read the the content of listings.jsons
 //     const listings = await readListings();
 //     // find the listing with the id in the request params
-//     const listing = listings.find((listing) => listing.id === req.params.id);
+//     const listing = listings.find((listing) => listing.id === paramsId);
 //     // if the listing is found
 //     if (listing) {
 //       // save the image in the images folder
@@ -219,12 +222,41 @@ listingsRouter.get("/search", async (req, res, next) => {
 //       // send the updated listing to the client
 //       res.status(200).send(listing);
 //     } else {
-//       next(createHttpError(404, "Listing not found"));
+//       next(createHttpError(404, `Listing with id: ${paramsId} was not found`));
 //     }
 //   } catch (error) {
 //     console.log(error);
 //     next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
 //   }
 // });
+
+// CLOUDINARY METHOD
+listingsRouter.post("/:id/upload/images", multer({storage: saveImageClodinary}).single("image"), async (req, res, next) =>{
+  try {
+    // save request params id in a variable
+    const paramsId = req.params.id;
+    // read the the content of listings.jsons
+    const listings = await readListings();
+    // find the listing with the id in the request params
+    const listing = listings.find((listing) => listing.id === paramsId);
+    // if the listing is found
+    if (listing) {
+      const imagePath = req.file.path;
+      const updatedImage = {...listing, image: imagePath};
+      const remainingListings = listings.filter(
+        (listing) => listing.id !== paramsId
+      );
+      remainingListings.push(updatedImage);
+      await writeListings(remainingListings);
+
+      res.status(200).send(updatedImage);
+    } else {
+      next(createHttpError(404, `Listing with id: ${paramsId} was not found`));
+    }
+  } catch (error) {
+    console.log(error);
+    next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+  }
+})
 
 export default listingsRouter;

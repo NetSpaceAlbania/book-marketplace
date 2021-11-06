@@ -48,7 +48,7 @@ export const removeImage = (imageName) =>
 export const saveImageClodinary = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "book-marketplace-hackerspace",
+    folder: "book-marketplace-hackerspace/images",
     allowedFormats: ["jpg", "png"],
     // transformation: [{ width: 500, height: 500, crop: "limit" }],
   },
