@@ -112,4 +112,29 @@ listingsRouter.put("/:id", validateListing, async (req, res, next) => {
   }
 });
 
+// ********* DELETE A SPECIFIC LISTING ********************
+listingsRouter.delete("/:id", async (req, res, next) => {
+  try {
+    // read the the content of listings.jsons
+    const listings = await readListings();
+    // find the listing with the id in the request params
+    const listing = listings.find((listing) => listing.id === req.params.id);
+    // if the listing is found
+    if (listing) {
+      // the remaining listings - all the listings apart the one we want to delete
+      const remainingListings = listings.filter(
+        (listing) => listing.id !== req.params.id
+      );
+      // save the new updated listings array to the file listings.json
+      await writeListings(remainingListings);
+      // send the deleted listing to the client
+      res.status(200).send(listing);
+    } else {
+      next(createHttpError(404, "Listing not found"));
+    }
+  } catch (error) {
+    console.log(error);
+    next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+  }
+});
 export default listingsRouter;
