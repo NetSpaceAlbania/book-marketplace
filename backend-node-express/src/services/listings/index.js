@@ -201,4 +201,7 @@ listingsRouter.get("/search", async (req, res, next) => {
   }
 });
 
+// UPLOAD IMAGES
+// 
+
 export default listingsRouter;
