@@ -80,35 +80,77 @@ listingsRouter.get("/:id", async (req, res, next) => {
 });
 
 // ********* UPDATE A SPECIFIC LISTING ********************
+// listingsRouter.put("/:id", validateListing, async (req, res, next) => {
+//   try {
+//     const errorList = validationResult(req);
+//     if (errorList.isEmpty()) {
+//       // read the the content of listings.jsons
+//       const listings = await readListings();
+//       // find the listing with the id in the request params
+//       const listing = listings.find((listing) => listing.id === req.params.id);
+//       // update the listing with the new information
+//       // the updatedListing is the merge of the copied object of the current listing that matches the id, with the copied object of the body request that will overwrite some part or everything of the original
+//       const updatedListing = {
+//         ...listing,
+//         ...req.body,
+//         updatedAt: new Date(),
+//       };
+//       // the remaining listings - all the listings apart the one we want to modify, the one that matches the id
+//       const remainingListings = listings.filter(
+//         (listing) => listing.id !== req.params.id
+//       );
+//       // push the updated listing to the listings array
+//       remainingListings.push(updatedListing);
+//     }
+//     // save the new updated listings array to the file listings.json
+//     await writeListings(remainingListings);
+//     // send the updated listing to the client
+//     res.status(200).send(updatedListing);
+//   } catch (error) {
+//     console.log(error);
+//     next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+//   }
+// });
+
 listingsRouter.put("/:id", validateListing, async (req, res, next) => {
   try {
+    // save request params id in a variable
+    const paramsId = req.params.id;
+
     const errorList = validationResult(req);
+
     if (errorList.isEmpty()) {
-      // read the the content of listings.jsons
+      // read the content of listings.json
       const listings = await readListings();
-      // find the listing with the id in the request params
-      const listing = listings.find((listing) => listing.id === req.params.id);
-      // update the listing with the new information
+      // find the listing with the id requested
+      const listing = listings.find((listing) => listing.id === paramsId);
       // the updatedListing is the merge of the copied object of the current listing that matches the id, with the copied object of the body request that will overwrite some part or everything of the original
-      const updatedListing = {
-        ...listing,
-        ...req.body,
-        updatedAt: new Date(),
-      };
+      const updatedListing = { ...listing, ...req.body };
       // the remaining listings - all the listings apart the one we want to modify, the one that matches the id
-      const remainingListings = listings.filter(
-        (listing) => listing.id !== req.params.id
+      const remaininglistings = listings.filter(
+        (listing) => listing.id !== paramsId
       );
-      // push the updated listing to the listings array
-      remainingListings.push(updatedListing);
+      // push the updatedlistin, the one we modified, to the remainingListings array (the listings we didn't touch)
+      remaininglistings.push(updatedListing);
+      // with the function writelistingd we can save the new updated array of listings in the listings json file where they are stored
+      await writeListings(remaininglistings);
+
+      res.send({
+        status: 200,
+        message: `The listing with the id: ${paramsId} was updated successfully`,
+        listing: listing,
+      });
+    } else {
+      next(
+        createHttpError(
+          404,
+          `The listing with the id: ${paramsId} was not found`
+        )
+      );
     }
-    // save the new updated listings array to the file listings.json
-    await writeListings(remainingListings);
-    // send the updated listing to the client
-    res.status(200).send(updatedListing);
   } catch (error) {
     console.log(error);
-    next(error); // pass the error to the next middleware (error handlers imported in server.js from errorHandling.js)
+    next(error);
   }
 });
 
