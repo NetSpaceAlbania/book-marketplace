@@ -1,9 +1,9 @@
-import fs from "fs-extra";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import fs from "fs-extra"; // will enable to read or write the json file at the particular path
+import { fileURLToPath } from "url"; // it's core module (no need to install) to convert the current url from import.meta.url to current file path
+import { dirname, join } from "path"; // core modules(no need to install). dirname will localize the directory name, join will join directory with json file name
 
-import { v2 as cloudinary } from "cloudinary"; 
-import { CloudinaryStorage } from "multer-storage-cloudinary"; 
+import { v2 as cloudinary } from "cloudinary"; // cloudinary module (needs to install)
+import { CloudinaryStorage } from "multer-storage-cloudinary"; // cloudinary module (needs to install)
 
 
 // fs cool stuff to read & write on disk
