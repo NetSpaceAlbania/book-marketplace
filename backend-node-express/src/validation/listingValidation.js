@@ -1,7 +1,6 @@
 import { body } from "express-validator";
 
-export const validateListing = () => {
-  return [
+export const validateListing = [
     body("title")
       .isString()
       .isLength({ min: 5, max: 50 })
@@ -11,4 +10,3 @@ export const validateListing = () => {
       .isLength({ min: 5, max: 500 })
       .withMessage("Description must be between 5 and 500 characters"),
   ];
-};

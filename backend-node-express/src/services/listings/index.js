@@ -12,18 +12,20 @@ import express from "express";
 import uniqid from "uniqid";
 import createHttpError from "http-errors";
 import { validationResult } from "express-validator";
-import { validateListing } from "../../validation/validation.js";
+import { validateListing } from "../../validation/listingValidation.js";
 import { readListings, writeListings } from "../../lib/fs-tools.js";
 
 const listingsRouter = express.Router();
 
 // ************* CREATE A NEW LISTING ******************
-listingsRouter.post("/", (req, res, next) => {
+listingsRouter.post("/", validateListing, async (req, res, next) => {
   try {
     const errorList = validationResult(req);
+    console.log("Error list: ", errorList);
     if (errorList.isEmpty()) {
-      // read the the content of listings.json
-      const listings = readListings();
+      // read the the content of listings.jsonrs
+      const listings = await readListings();
+      console.log("Listings consol log: ", listings);
       // read the requests body
       const newListing = {
         id: uniqid(),
@@ -33,19 +35,27 @@ listingsRouter.post("/", (req, res, next) => {
       // push the new listing to the listings array
       listings.push(newListing);
       // write the new listings array to the file listings.json
-       writeListings(listings);
+       await writeListings(listings);
       // send the new listing to the client
       res.status(201).send(newListing);
     } else {
-      next(createError(400, { errorList }));
+      next(createHttpError(400, { errorList }));
     }
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+// ********* GET ALL LISTINGS ********************
+listingsRouter.get("/", async (req, res, next) => {
+  try {
+    const listings = await readListings();
+    res.status(200).send(listings);
   } catch (error) {
     console.log(error);
     next(error);
   }
 });
-
-// ********* GET LISTING BY ID ********************
-// listingsRouter.get("/:id", async (req, res, next) => {});
 
 export default listingsRouter;

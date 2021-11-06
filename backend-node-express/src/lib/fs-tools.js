@@ -23,10 +23,4 @@ const listingsJsonPath = join(
 // **********************/ How to read & write on disk **********************
 export const readListings = () => readJSON(listingsJsonPath);
 
-export const writeListings = async (listings) => {
-  try {
-    await writeJSON(listingsJsonPath, listings);
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const writeListings = (content) => writeJSON(listingsJsonPath, content);
