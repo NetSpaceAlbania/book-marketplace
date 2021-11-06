@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verify } from '../actions/auth';
+import { verify } from '../redux/actions/auth';
 
 import { CheckCircleIcon } from "@chakra-ui/icons";
 

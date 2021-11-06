@@ -6,6 +6,7 @@ import { Grid, GridItem } from "@chakra-ui/react"
 
 
 const Home = () => {
+
     return (
         <div>
             <Grid templateColumns="repeat(8, 1fr)" gap={0}>

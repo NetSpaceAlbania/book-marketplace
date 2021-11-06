@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { logout } from '../../actions/auth';
+import { logout } from '../../redux/actions/auth';
 
 import { Heading,
     InputGroup,

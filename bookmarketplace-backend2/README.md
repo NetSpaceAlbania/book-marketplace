@@ -6,6 +6,11 @@ per te krijuar mjedisin virtual dhe
 ### `source env/bin/activate`
 per ta aktivizuar ate. Nese jeni ne windows perdorni
 ### `env\Scripts\activate`
+
+(Windows Bash)
+
+### `source env/Scripts/activate`
+
 per te instaluar te gjith librarit e nevojshme perdorni
 ### `pip install -r requirements.txt`
 dhe per te nisur serverin perdorni

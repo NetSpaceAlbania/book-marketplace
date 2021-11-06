@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { signin } from '../actions/auth';
+import { signin } from '../redux/actions/auth';
 
 import {
     Formik,

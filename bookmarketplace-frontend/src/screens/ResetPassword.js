@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { reset_password } from '../actions/auth';
+import { reset_password } from '../redux/actions/auth';
 
 import { Grid,
     Image,

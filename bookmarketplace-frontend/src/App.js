@@ -11,7 +11,7 @@ import MyListings from './screens/MyListings';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './redux/store';
 
 import Layout from './hocs/Layout';
 

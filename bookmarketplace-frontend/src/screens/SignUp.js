@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { signup } from '../actions/auth';
+import { signup } from '../redux/actions/auth';
 import {
     Formik,
     Field,

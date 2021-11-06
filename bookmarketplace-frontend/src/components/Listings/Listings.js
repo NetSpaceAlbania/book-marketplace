@@ -7,8 +7,16 @@ import { Box,
 } from "@chakra-ui/react";
 
 import libri from '../../assets/libri1.jpg';
+import { getListings } from '../../redux/actions/listings';
+import { connect } from 'react-redux';
 
-const Listings = () => {
+const Listings = ({getListings}) => {
+
+    React.useEffect(() => {
+
+        getListings();
+
+    }, [])
 
     const librat = [1,2,3,4,5,6,7,8,9,10,11];
 
@@ -42,4 +50,7 @@ const Listings = () => {
     )
 }
 
-export default Listings
+const mapStateToProps = state => ({
+});
+
+export default connect(mapStateToProps, { getListings })(Listings)
