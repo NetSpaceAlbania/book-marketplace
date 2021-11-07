@@ -4,7 +4,7 @@ import verify from "../../verifyToken.js"
 
 const userRouter = express.Router();
 
-// ***************UPDATE********************
+// *************** UPDATE ********************
 userRouter.put("/:id", verify, async (req, res) => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       if (req.body.password) {
@@ -30,7 +30,7 @@ userRouter.put("/:id", verify, async (req, res) => {
     }
   });
 
-  // ***************DELETE********************
+  // *************** DELETE ********************
 userRouter.delete("/:id", verify, async (req, res) => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       try {
@@ -41,6 +41,17 @@ userRouter.delete("/:id", verify, async (req, res) => {
       }
     } else {
       res.status(403).json("You can delete only your account!");
+    }
+  });
+
+  // *************** GET SPECIFIC USER ********************
+userRouter.get("/find/:id", async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      const { password, ...info } = user._doc;
+      res.status(200).json(info);
+    } catch (err) {
+      res.status(500).json(err);
     }
   });
 
