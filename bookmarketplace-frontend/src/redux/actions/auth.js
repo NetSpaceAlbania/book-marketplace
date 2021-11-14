@@ -17,7 +17,7 @@ import {
     AUTHENTICATED_SUCCESS
 } from './types';
 
-import url from '../constants/environment';
+const url = "url";
 
 export const checkAuthenticated = () => async dispatch => {
 

@@ -7,16 +7,10 @@ import { Box,
 } from "@chakra-ui/react";
 
 import libri from '../../assets/libri1.jpg';
-import { getListings } from '../../redux/actions/listings';
-import { connect } from 'react-redux';
 
-const Listings = ({getListings}) => {
+const Listings = ({listings = []}) => {
 
-    React.useEffect(() => {
-
-        getListings();
-
-    }, [])
+    const [sort, setSort] = React.useState(2);
 
     const librat = [1,2,3,4,5,6,7,8,9,10,11];
 
@@ -28,20 +22,21 @@ const Listings = ({getListings}) => {
                     <Text fontSize="lg" fontWeight="400" color="gray.500" w="150px">
                         Listo sipas:
                     </Text>
-                    <Select placeholder="Dates: Me te rejat" bg="white">
+                    <Select placeholder=" " bg="white">
+                        <option value={1} key={1} onchange>Dates: Me te rejat</option>
                         <option value={2} key={2}>Cmimit: Me te lirat</option>
                     </Select>
                 </Flex>
             </Flex>
             <Flex justifyContent="space-around" wrap="wrap" w="90%">
-                {librat.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" my="5" key={e}>
+                {listings.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" my="5" key={e.id}>
                     <Image src={libri} alt={libri} borderTopRadius="lg" cursor="pointer"/>
                     <Box m="6" cursor="pointer">
                         <Box fontWeight="semibold" as="h4" isTruncated>
-                            <Text fontSize="xl" >Matematika 1</Text>
+                            <Text fontSize="xl">{e.title}</Text>
                         </Box>
                         <Box>
-                            <Text fontSize="xl">ALL 1500</Text>
+                            <Text fontSize="xl">ALL {e.price}</Text>
                         </Box>
                     </Box>
                 </Box>)}
@@ -50,7 +45,4 @@ const Listings = ({getListings}) => {
     )
 }
 
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps, { getListings })(Listings)
+export default Listings

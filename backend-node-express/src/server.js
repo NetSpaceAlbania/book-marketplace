@@ -20,6 +20,21 @@ server.use(cors()); //cors connects BE with FE *** the same as app.use(cors());
 
 server.use(express.json()); //this has to be specified BEFORE the routes, otherwise the body will be UNDEFINED
 
+// const whiteList = ["http://localhost:3000"];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (whiteList.some((allowedUrl) => allowedUrl === origin)) {
+//       callback(null, true);
+//     } else {
+//       const error = new Error("Not allowed by cors!");
+//       error.status = 403;
+//       callback(error);
+//     }
+//   },
+// };
+
+server.use(cors());
+
 // ******************* ENDPOINTS ***************************************************
 // a Router is set of endpoints that share something like a prefix (listingsRouter is going to share "/listings" as a prefix")
 server.use("/listings", listingsRouter);
