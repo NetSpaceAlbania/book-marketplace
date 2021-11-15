@@ -27,8 +27,10 @@ import bookIllustation from "../assets/bookIllustation.svg";
 const ResetPasswordConfirm = (props) => {
     const [requestSent, setRequestSent] = useState(false);
 
+    const navigate = useNavigate();
+
     if (requestSent)
-        return <Redirect to='/signin' />
+        return navigate('/');
     return (
                 <Grid templateColumns="repeat(7, 1fr)" h="calc(100vh - 80px)" >
                 <Flex gridColumn="span 3" bg="#263772" alignItems="center" justifyContent="center">
@@ -55,7 +57,7 @@ const ResetPasswordConfirm = (props) => {
                                         const uid = props.match.params.uid;
                                         const token = props.match.params.token;
 
-                                        props.reset_password_confirm(uid, token, new_password, re_new_password);
+                                        // props.reset_password_confirm(uid, token, new_password, re_new_password);
                                         setTimeout(() => {
                                             setRequestSent(true);
                                         }, 5000);
@@ -122,4 +124,4 @@ const ResetPasswordConfirm = (props) => {
     );
 };
 
-export default connect(null, { reset_password_confirm })(ResetPasswordConfirm);
+export default ResetPasswordConfirm;

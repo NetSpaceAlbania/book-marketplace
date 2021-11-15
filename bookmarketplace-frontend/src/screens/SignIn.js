@@ -26,8 +26,10 @@ import bookIllustation from "../assets/bookIllustation.svg";
 
 const SignIn = ({signin, isAuthenticated}) => {
 
+    const navigate = useNavigate();
+
     if (isAuthenticated)
-        return <Redirect to='/' />;
+        return navigate('/');
 
     return (
         <Grid templateColumns="repeat(7, 1fr)" h="calc(100vh - 80px)" >
@@ -113,8 +115,5 @@ const SignIn = ({signin, isAuthenticated}) => {
     )
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
-});
 
-export default connect(mapStateToProps, { signin })(SignIn);
+export default SignIn;

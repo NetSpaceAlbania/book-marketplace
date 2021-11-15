@@ -37,10 +37,12 @@ const SignUp = ({ signup, isAuthenticated }) => {
 
     const [accountCreated, setAccountCreated] = useState(false);
 
+    const navigate = useNavigate();
+
     if (isAuthenticated)
-        return <Redirect to='/' />;
+        return navigate('/');
     if (accountCreated)
-        return <Redirect to='/signin' />;
+        return navigate('/signin');
 
     return (
         <Grid templateColumns="repeat(7, 1fr)" h="calc(100vh - 80px)" >
@@ -170,8 +172,4 @@ const SignUp = ({ signup, isAuthenticated }) => {
     )
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-})
-
-export default connect(mapStateToProps, { signup })(SignUp);
+export default SignUp;

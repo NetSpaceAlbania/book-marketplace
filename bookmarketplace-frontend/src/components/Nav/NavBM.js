@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { logout } from '../../redux/actions/auth';
 
 import { Heading,
     InputGroup,
@@ -65,8 +63,4 @@ const NavBM = ({logout, isAuthenticated}) => {
     )
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, { logout })(NavBM);
+export default NavBM;

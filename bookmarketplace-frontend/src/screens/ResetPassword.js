@@ -24,6 +24,8 @@ const ResetPassword = (props) => {
 
     const toast = useToast();
 
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         email: ''
     });
@@ -39,7 +41,7 @@ const ResetPassword = (props) => {
     const onSubmit = e => {
         e.preventDefault();
         
-        props.reset_password(email);
+        // props.reset_password(email);
 
         toast({
             title: "Kerkesa u dergua.",
@@ -58,7 +60,7 @@ const ResetPassword = (props) => {
     };
 
     if (requestSent){
-        return <Redirect to='/' />
+        return navigate('/');
     }
 
     return (
@@ -110,4 +112,4 @@ const ResetPassword = (props) => {
     );
 };
 
-export default connect(null, { reset_password })(ResetPassword);
+export default ResetPassword;

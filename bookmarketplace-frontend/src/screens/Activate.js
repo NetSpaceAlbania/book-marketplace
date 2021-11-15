@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { verify } from '../redux/actions/auth';
 
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
@@ -17,7 +15,7 @@ const Activate = ({ verify, match }) => {
     const uid = match.params.uid;
     const token = match.params.token;
 
-    verify(uid, token);
+    // verify(uid, token);
 
     return (
         <Flex h="calc(100vh - 80px)" w="100%" align="center" justify="center">
@@ -39,4 +37,4 @@ const Activate = ({ verify, match }) => {
     );
 };
 
-export default connect(null, { verify })(Activate);
+export default Activate;

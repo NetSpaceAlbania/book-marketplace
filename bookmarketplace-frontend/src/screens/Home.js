@@ -1,34 +1,14 @@
 import React from 'react';
 import Filter from '../components/Filter/Filter';
 import Listings from '../components/Listings/Listings';
-import { Grid, GridItem } from "@chakra-ui/react";
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import { Grid, GridItem, Spinner, Flex } from "@chakra-ui/react";
+import { useGetListingsQuery } from '../redux/services/listings/listingsApi';
 
 
 const Home = () => {
 
-    // const count = useSelector((state) => state.counter.value)
-    const dispatch = useDispatch();
-
-    const [listings, setListings] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-
-    const getListings = async () => {
-        try{
-            let res = await axios.get('http://localhost:3001/listings');
-            setListings(res.data);
-        }
-        catch(error){
-            console.log(error)
-        }finally {
-            setIsLoading(false);
-        }
-    }
-
-    React.useEffect(() => {
-        getListings();
-    }, [])
+    const {data, error, isLoading} = useGetListingsQuery("listings");
+    console.log(data, error, isLoading);
 
     return (
         <div>
@@ -37,7 +17,17 @@ const Home = () => {
                     <Filter/>
                 </GridItem>
                 <GridItem colSpan={6} bg="#F7FAFC">
-                    {!isLoading && <Listings listings={listings}/>}
+                    {isLoading ? 
+                        <Flex align="center" h="full">
+                            <Spinner
+                                margin="auto"
+                                thickness="4px"
+                                speed="0.65s"
+                                emptyColor="gray.200"
+                                color="blue.500"
+                                size="xl"
+                            />
+                        </Flex> : <Listings listings={data}/>}
                 </GridItem>
             </Grid>
         </div>

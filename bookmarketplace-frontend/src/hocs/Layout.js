@@ -5,19 +5,6 @@ import { checkAuthenticated, load_user } from '../redux/actions/auth';
 
 const Layout = (props) => {
 
-    useEffect( props => {
-        const fetchData = async () => {
-            try {
-                await props.checkAuthenticated();
-                await props.load_user();
-            } catch (err) {
-
-            }
-        }
-
-        fetchData();
-    }, []);
-
     return (
         <div>
             <Navbar />
@@ -26,4 +13,4 @@ const Layout = (props) => {
     );
 };
 
-export default connect(null, { checkAuthenticated, load_user })(Layout);
+export default Layout;

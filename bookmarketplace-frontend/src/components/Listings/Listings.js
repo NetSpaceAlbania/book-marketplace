@@ -5,14 +5,19 @@ import { Box,
     Text,
     Image
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 import libri from '../../assets/libri1.jpg';
 
 const Listings = ({listings = []}) => {
 
+    const navigate = useNavigate();
+
     const [sort, setSort] = React.useState(2);
 
-    const librat = [1,2,3,4,5,6,7,8,9,10,11];
+    const handleClick = (e) => {
+        navigate(e);
+    }
 
     return (
         <Flex justifyContent="center" alignItems="center" w="full" flexDir="column">
@@ -29,7 +34,7 @@ const Listings = ({listings = []}) => {
                 </Flex>
             </Flex>
             <Flex justifyContent="space-around" wrap="wrap" w="90%">
-                {listings.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" my="5" key={e.id}>
+                {listings.map(e => <Box borderWidth="1px" borderRadius="lg" w="300px" h="500px" bg="white" my="5" key={e.id} onClick={() => handleClick(e.id)}>
                     <Image src={libri} alt={libri} borderTopRadius="lg" cursor="pointer"/>
                     <Box m="6" cursor="pointer">
                         <Box fontWeight="semibold" as="h4" isTruncated>
