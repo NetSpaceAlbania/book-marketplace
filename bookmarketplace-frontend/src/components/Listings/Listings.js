@@ -16,7 +16,7 @@ const Listings = ({listings = []}) => {
     const [sort, setSort] = React.useState(2);
 
     const handleClick = (e) => {
-        navigate(e);
+        navigate(`detailedlisting/${e}`);
     }
 
     return (
@@ -28,7 +28,7 @@ const Listings = ({listings = []}) => {
                         Listo sipas:
                     </Text>
                     <Select placeholder=" " bg="white">
-                        <option value={1} key={1} onchange>Dates: Me te rejat</option>
+                        <option value={1} key={1} onChange>Dates: Me te rejat</option>
                         <option value={2} key={2}>Cmimit: Me te lirat</option>
                     </Select>
                 </Flex>
