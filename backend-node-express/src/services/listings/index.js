@@ -188,13 +188,14 @@ listingsRouter.delete("/:id", async (req, res, next) => {
 });
 
 // ********* SEARCH FOR A SPECIFIC LISTING ********************
-listingsRouter.get("/search", async (req, res, next) => {
+listingsRouter.get("/s/:toSearch", async (req, res, next) => {
   try {
     // read the the content of listings.jsons
+
     const listings = await readListings();
     // find the listing with the id in the request params
     const searchListings = listings.filter((listing) =>
-      listing.title.toLowerCase().includes(req.query.q.toLowerCase())
+      listing.title.toLowerCase().includes(req.params.keyword.toLowerCase())
     );
     // if the listing is found send it to the client
     if (searchListings) {

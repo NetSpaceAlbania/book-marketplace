@@ -6,7 +6,7 @@ import { Flex,
     Text
 } from "@chakra-ui/react";
 import { WarningIcon, QuestionIcon, TriangleDownIcon } from "@chakra-ui/icons";
-import { useGetDetailedListingQuery } from '../redux/services/api/api';
+import { useGetDetailedListingQuery } from '../redux/services/api/listings';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
